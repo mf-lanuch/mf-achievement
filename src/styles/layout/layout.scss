@@ -1,0 +1,89 @@
+.app-container {
+    height: 100%;
+    .nav-menu {
+        width: auto !important;
+        background-color: #ccd1d0;
+        text-align: right;
+
+        .el-button {
+            background: #ccd1d0;
+            border: none;
+            color: #000;
+            padding-right: 24px;
+        }
+
+        .menu:not(.el-menu--collapse) {
+            width: 256px;
+        }
+        .el-menu {
+            border-right: 0;
+            background: none;
+            .el-menu-item {
+                text-align: left;
+                border-bottom: 1px solid #e8e8e8;
+                padding-right: 0;
+                a {
+                    display: inline-block;
+                    width: 100%;
+                    color: #000;
+                    text-decoration: none;
+                }
+            }
+            .is-active {
+                span, i {
+                    color: #409EFF
+                }
+            }
+        }
+    }
+    .app-content {
+        flex-direction: column;
+        border-left: 1px solid #ccc;
+        
+        .header {
+            height: 60px !important;
+            font-size: 12px;
+            line-height: 60px;
+            display: flex;
+            flex-direction: row;
+            .dropdown {
+                margin-right: 15px
+            }
+            .header-title {
+                flex-grow: 2;
+                font-size: 20px;
+                font-weight: bold;
+                text-align: left;
+            }
+        }
+
+        .app-main {
+            padding: 0;
+
+            .el-tabs {
+                box-shadow: 0 0 0;
+                border-bottom: 0;
+                border-left: 0;
+            }
+        }
+    }
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+    height: 8px;
+    background-color: #ccc;
+    border-radius: 8px;
+    outline: 2px solid #fff;
+    outline-offset: -2px;
+    border: 2px solid #fff;
+}
+
+::-webkit-scrollbar-track-piece {
+    background-color: #fff;
+    border-radius: 3px;
+}
