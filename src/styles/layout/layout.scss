@@ -1,39 +1,74 @@
 .app-container {
     height: 100%;
     .nav-menu {
-        width: auto !important;
-        background-color: #ccd1d0;
-        text-align: right;
+        width: 16.67% !important;
+        overflow: hidden;
+        background-color: #0A1D33;
+        // text-align: right;
+        .logo {
+            width: 100%;
+            // padding: 18px 15px 0 0;
+            img {
+                width: 52px;
+                margin: 23px 0 23px 38px;
+                display: inline-block;
+                vertical-align: middle;
+                // padding-right: 16px;
+            }
+            span {
+                font-size: 16px;
+                color: #fff;
+                display: inline-block;
+                vertical-align: middle;
+            }
+        }
 
         .el-button {
-            background: #ccd1d0;
+            background: rgba(10, 29, 51, 0.8);
             border: none;
-            color: #000;
+            color: rgba(255, 255, 255, 1);
             padding-right: 24px;
         }
 
         .menu:not(.el-menu--collapse) {
-            width: 256px;
+            width: 100%;
         }
         .el-menu {
+            width: 240px;
+            
             border-right: 0;
             background: none;
             .el-menu-item {
                 text-align: left;
-                border-bottom: 1px solid #e8e8e8;
+                // border-bottom: 1px solid #e8e8e8;
                 padding-right: 0;
+                padding-left: 0 !important;
+                height: 48px;
                 a {
                     display: inline-block;
                     width: 100%;
-                    color: #000;
+                    color: rgba(255, 255, 255, .85);
                     text-decoration: none;
                 }
-            }
-            .is-active {
-                span, i {
-                    color: #409EFF
+                img {
+                    width: 15px;
+                    height: 15px;
+                    margin-left: 25px;
+                }
+                span {
+                    display: inline-block;
+                    vertical-align: middle;
+                    margin-left: 12px
                 }
             }
+            
+            .el-menu-item:hover, .el-menu-item:active, .el-menu-item:link, .is-active {
+                background-color: #3390FF;
+                span {
+                    font-size: 16px;
+                    font-weight: bold;
+                }
+            } 
         }
     }
     .app-content {
@@ -41,13 +76,24 @@
         border-left: 1px solid #ccc;
         
         .header {
-            height: 60px !important;
+            height: 64px !important;
             font-size: 12px;
-            line-height: 60px;
+            line-height: 64px;
             display: flex;
             flex-direction: row;
+            background: #fff;
             .dropdown {
                 margin-right: 15px
+            }
+            .header-ava {
+                width: 32px;
+                height: 32px;
+                margin: 10px 12px;
+                img {
+                    width: 32px;
+                    height: 32px;
+                    margin: 0;
+                }
             }
             .header-title {
                 flex-grow: 2;
@@ -55,16 +101,37 @@
                 font-weight: bold;
                 text-align: left;
             }
+
+            .search-item {
+                display: inline-block;
+                span {
+                    font-size: 14px;
+                    font-weight: lighter;
+                }
+                .el-date-editor {
+                    width: 200px
+                }
+
+            }
+            .search-item:last-child {                
+                span {
+                    margin-left: 16px
+                }
+            }
+        }
+        .header img {
+            width: 20px;
+            height: 20px;
+            margin: 22px 12px;
+        }
+        .header .dropdown {
+            width: 16px;
+            height: 16px;
+            margin: 24px 12px 24px 0;
         }
 
         .app-main {
-            padding: 0;
-
-            .el-tabs {
-                box-shadow: 0 0 0;
-                border-bottom: 0;
-                border-left: 0;
-            }
+            padding: 16px;
         }
     }
 }

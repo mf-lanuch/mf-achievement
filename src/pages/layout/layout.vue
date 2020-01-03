@@ -1,9 +1,9 @@
 <template>
     <el-container class="app-container">
-        <navmenu @menuClick="menuClick"/>
-        <el-container class="app-content">
-            <appheader />
-            <appmain ref="appmain"/>
+        <navmenu />
+        <el-container class="app-content" ref="container">
+            <appheader ref="appheader" @changeDate="changeDate"/>
+            <appmain ref="appmain" @getSearch="getSearch"/>
         </el-container>
     </el-container>
 </template>
@@ -20,18 +20,22 @@ export default {
     appheader,
     appmain
   },
-  methods: {
-    menuClick (obj) {
-      this.$refs.appmain.addTab(obj)
-    }
-  },
   data () {
     return {
+    }
+  },
+  methods: {
+    changeDate (search) {
+      this.$refs.appmain.changeDate(search)
+    },
+    getSearch () {
+      let search = this.$refs.appheader.getSearch()
+      this.changeDate(search)
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-@import "src/styles/layout/layout.scss";
+@import "../../styles/layout/layout.scss";
 </style>

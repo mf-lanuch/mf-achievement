@@ -1,0 +1,149 @@
+#container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    .row {
+        margin: 8px 0;
+    }
+    .panel-container {
+        display: flex;
+        height: 140px;
+        margin-top: 0;
+        // flex-grow: 1;
+        .panel {
+            background: #fff;
+            flex-grow: 1;
+            padding: 10px 16px;
+            .panel-body {
+                border-bottom: 1px solid rgba(232, 232, 232, 1)
+            }
+            .panel-info {
+                display: flex;
+
+                .panel-info-rate {
+                    text-align: left;
+                    flex-grow: 2;
+                    p {
+                        font-size: 14px;
+                        color: rgba(0, 0, 0, .45);
+                        margin-top: 0;
+                        margin-bottom: 5px;
+                    }
+                    p.rate, span.rate {
+                        font-size: 20px;
+                        color: rgba(0, 0, 0, .85);
+                        margin-right: 12px;
+                        margin-bottom: 13px;
+                    }
+                    
+                    p:last-child{
+                        margin-bottom: 20px;
+                    }
+                }
+                .panel-info-icon {
+                    width: 36px;
+                    img {
+                        width: 100%;
+                        margin-top: 11px;
+                    }
+                }
+            }
+            .panel-process {
+                padding: 0 0 10px;
+            }
+            .panel-foot {
+                text-align: left;
+                height: 20px;
+                margin: 10px 0 0;
+                color: rgba(0, 0, 0, .45);
+                font-size: 14px;
+            }
+        }
+        .panel + .panel {
+            margin-left: 16px;
+        }
+    }
+    .body {
+        display: flex;
+        // flex-grow: 1;
+        height: 320px;
+        flex-direction: column;
+        background-color: #fff;
+        overflow: hidden;
+        .acievement-type {
+            width: 100%;
+            padding: 8px 16px;
+            height: 32px;
+        }
+        .achievement-data {
+            display: flex;
+            flex-direction: row;
+            flex-grow: 2;
+            padding: 0 0 2px 0;
+            .achievement-week-month {
+                width: 50%;
+                height: 100%;
+                border-top: 1px solid #ccc;
+                display: flex;
+                flex-direction: column;
+                overflow: hidden;
+                .achievement-week-month-title {
+                    height: 30px;
+                    width: 100%;
+                    padding: 4px 0 4px 16px;
+                    text-align: left;
+                    span {
+                        display: inline-block;
+                        font-size: 14px;
+                        line-height: 30px;
+                        color: rgba(0, 0, 0, .85)
+                    }
+
+                    span + span {
+                        color: rgba(0, 0, 0, .45);
+                    }
+                }
+
+                .achievement-week-month-echart {
+                    flex: 1;
+                    height: 224px;
+                }
+            }
+            .achievement-week-month + .achievement-week-month {
+                border-left: 1px solid #ccc
+            }
+        }
+    }
+    .foot {
+        display: flex;
+        flex-grow: 2;
+        height: 120px;
+        .achievement-table, .achievement-circle {
+            padding: 8px 16px;
+            width: 50%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            background-color: #fff;
+
+            .title {
+                text-align: left;
+                padding-bottom: 8px;
+                border-bottom: 1px solid rgba(232, 232, 232, 1)
+            }
+            .body {
+                // flex-grow: 2;
+                padding: 16px 16px 8px;
+            }
+        }
+        .achievement-circle {
+            margin-left: 16px;
+        }
+    }    
+    
+}
+
+.week-hour {
+    flex-grow: 2;
+    height: 100%;
+}

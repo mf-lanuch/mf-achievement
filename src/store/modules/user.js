@@ -5,19 +5,64 @@ import { postUserLogin, getUserInfo } from '@/api/login'
 
 const user = {
   state: {
-    userInfo: null,
+    userInfo: {
+      pcode: '00045',
+      partId: '122E5E13ABFA47548F41D594CED5210E'
+    },
     menus: {
       children: [{
-        title: '首页',
-        name: 'homepage',
-        icon: 'menu',
+        title: '常用流程',
+        name: 'flow',
+        icon: 'home',
+        path: '/',
+        children: []
+      }, {
+        title: '考勤明细',
+        name: 'attendancDetails',
+        icon: 'table',
+        path: '/attendancDetails',
+        children: []
+      }, {
+        title: '个人加班记录',
+        name: 'overtimeRecord',
+        icon: 'detail',
+        path: '/overtimeRecord',
+        children: []
+      }, {
+        title: '加班记录',
+        name: 'overtimeRecordAll',
+        icon: 'detail',
+        path: '/overtimeRecordAll',
+        children: []
+      }, {
+        title: '加班统计',
+        name: 'overtimeStatistics',
+        icon: 'jbtj',
         path: '/homepage',
         children: []
       }, {
-        title: '绩效管理',
-        name: 'achievement',
-        icon: 'setting',
-        path: '/achievement',
+        title: '休假记录',
+        name: 'leaveRecord',
+        icon: 'holiday',
+        path: '/leaveRecord',
+        children: []
+      }, {
+        title: '工作日历',
+        name: 'workCalendar',
+        icon: 'work',
+        path: '/workCalendar',
+        children: []
+      }, {
+        title: '值班表查询',
+        name: 'inquiry',
+        icon: 'works',
+        path: '/inquiry',
+        children: []
+      }, {
+        title: '倍率查询',
+        name: 'times',
+        icon: 'works',
+        path: '/times',
         children: []
       }]
     },

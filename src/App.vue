@@ -24,6 +24,7 @@ html,body,#app{
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+  background: rgba(240, 242, 245, 1)
 }
 body {
   margin: 0

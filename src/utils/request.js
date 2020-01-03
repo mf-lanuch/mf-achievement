@@ -5,14 +5,14 @@ import { getToken, removeToken } from '@/utils/auth'
 let _relist = false
 
 // 在config/h5/index.js每新增一个proxy,此处需要新增一个相应的正则匹配规则，并在config/h5/prod.env.js添加相应host
-let urlList = {
-  '/api': process.env.api_root
-}
+// let urlList = {
+//   '/api': process.env.api_root
+// }
 
 export default async (setings) => {
   let _loading
   const cache = setings.cache
-  const isUpload = setings.isUpload
+  const isUpload = setings.isUpload || false
   const banLoading = setings.banLoading
   // create an axios instance
   const service = axios.create({
@@ -32,13 +32,13 @@ export default async (setings) => {
       })
     }
     // url加前缀
-    for (let i in urlList) {
-      let re = new RegExp('^' + i)
-      if (re.test(config.url)) {
-        config.url = urlList[i] + config.url
-        break
-      }
-    }
+    // for (let i in urlList) {
+    //   let re = new RegExp('^' + i)
+    //   if (re.test(config.url)) {
+    //     config.url = urlList[i] + config.url
+    //     break
+    //   }
+    // }
     // Do something before request is sent
     if (store.getters.token) {
       config.headers.Authorization = getToken() // 让每个请求携带token--['X-Token']为自定义key 请根据实际情况自行修改
@@ -151,9 +151,9 @@ export default async (setings) => {
 
   // 是否上传文件
   if (isUpload) {
-    setings.headers = {
-      'Content-Type': 'multipart/form-data'
-    }
+    // setings.headers = {
+    //   'Content-Type': 'multipart/form-data'
+    // }
   }
 
   return await service(setings)
