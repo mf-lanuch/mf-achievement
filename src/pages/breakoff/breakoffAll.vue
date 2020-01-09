@@ -4,21 +4,30 @@
       <el-input placeholder="请输入姓名" suffix-icon="el-icon-search" v-model="weekMonth.pname" @change="handleChange"></el-input>
     </div>
     <div class="row listPersonalOtDetail">
-      <el-table :data="records.overtime" style="width: 100%" height="600">
-        <el-table-column align="center" label="姓名">
-          <template slot-scope="scope">
-            <span class='pname' @click='handleDetail(scope.row.pcode)'>{{scope.row.pname}}</span>
-          </template>
-        </el-table-column>
-        <el-table-column align="center" prop="pcode" label="工号"></el-table-column>
-        <el-table-column align="center" label="持续小时">
-          <template slot-scope="scope">
-            {{formatOtTime(scope.row.totalOverTime)}}
-          </template>
-        </el-table-column>
-        <el-table-column align="center" label="类型">
-          <template>调休</template>
-        </el-table-column>
+      <el-table :data="records.overtime" style="width: 100%" height="660px">
+          <el-table-column align="center" prop="pcode" label="工号"></el-table-column>
+          <el-table-column align="center" prop="pname" label="姓名">
+            <template slot-scope="scope">
+              <span class='pname' @click='handleDetail(scope.row.pcode, scope.row.pname)'>{{scope.row.pname}}</span>
+            </template>
+          </el-table-column>
+          <el-table-column align="center" prop="workYear" label="年份"></el-table-column>
+          <el-table-column align="center" prop="workMonth" label="月份"></el-table-column>
+          <el-table-column align="center" label="可调休时长">
+            <template slot-scope="scope">
+              {{formatOtTime(scope.row.usableBreakOffTime)}}
+            </template>
+          </el-table-column>
+          <el-table-column align="center" label="已调休时长">
+            <template slot-scope="scope">
+              {{formatOtTime(scope.row.usedBreakOffTime)}}
+            </template>
+          </el-table-column>
+          <el-table-column align="center" label="调休率">
+            <template slot-scope="scope">
+              {{formatNumber(scope.row.breakOffVal)}} %
+            </template>
+          </el-table-column>
       </el-table>
       <el-pagination
         @size-change="handleSizeChange" @current-change="handleCurrentChange" background
@@ -31,9 +40,9 @@
 
 <script>
 import util from '../../utils/utils'
-import {listPersonaOvertime} from '../../api/index'
+import {listMfBreakOffs} from '../../api/index'
 export default {
-  name: 'overtimeRecordAll',
+  name: 'breakoffAll',
   data () {
     return {
       userInfo: undefined,
@@ -87,10 +96,10 @@ export default {
         pageIndex: this.page,
         pageSize: this.pageSize,
         pname: this.weekMonth.pname,
-        workStartDate: this.weekHour.workStartDate,
-        workEndDate: this.weekHour.workEndDate
+        workMonth: 12,
+        workYear: 2019
       }
-      listPersonaOvertime(param).then(response => {
+      listMfBreakOffs(param).then(response => {
         let obj = response.data.object
         that.page = obj.pageNum
         that.pageSize = obj.pageSize
@@ -101,11 +110,15 @@ export default {
       })
     },
     formatOtTime (value) {
-      let result = value / 3600
+      if (util.isNull(value)) {
+        return 0
+      }
+      let minute = util.getMinute(value)
+      let result = minute / 60
       return result.toFixed(2)
     },
     formatNumber (value) {
-      return util.formatNumber(value)
+      return (value * 100).toFixed(2)
     },
     handleSizeChange (value) {
       this.pageSize = value
@@ -115,8 +128,11 @@ export default {
       this.page = value
       this.listPersonaOvertime()
     },
-    handleDetail (pcode) {
-      this.$router.push({name: 'overtimeRecord', params: {pcode: pcode}})
+    handleDetail (pcode, pname) {
+      this.weekMonth.pcode = pcode
+      this.weekMonth.pname = pname
+      this.listPersonaOvertime()
+      // this.$router.push({name: 'breakoff', params: {pcode: pcode}})
     }
   },
   created () {

@@ -35,8 +35,8 @@ export default {
   data () {
     return {
       search: {
-        startDate: new Date(),
-        endDate: new Date()
+        startDate: new Date('2019-12-02'),
+        endDate: new Date('2019-12-31')
       }
     }
   },

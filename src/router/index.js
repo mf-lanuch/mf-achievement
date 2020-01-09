@@ -90,6 +90,20 @@ export default new Router({
         meta: {
           title: '倍率查询'
         }
+      }, {
+        path: '/breakoff',
+        name: 'breakoff',
+        component: require('@/pages/breakoff/breakoff').default,
+        meta: {
+          title: '调休查询'
+        }
+      }, {
+        path: '/breakoffAll',
+        name: 'breakoffAll',
+        component: require('@/pages/breakoff/breakoffAll').default,
+        meta: {
+          title: '调休统计'
+        }
       }]
     }
   ]

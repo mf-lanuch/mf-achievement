@@ -95,3 +95,11 @@ export function updateMfMagnification (data) {
     data: data
   })
 }
+
+export function listMfBreakOffs (data) {
+  return request({
+    url: '/api/mfBreakOff/listMfBreakOffs',
+    method: 'POST',
+    data: data
+  })
+}

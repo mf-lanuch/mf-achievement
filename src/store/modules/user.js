@@ -41,6 +41,24 @@ const user = {
         path: '/homepage',
         children: []
       }, {
+        title: '调休查询',
+        name: 'breakoff',
+        icon: 'detail',
+        path: '/breakoff',
+        children: []
+      }, {
+        title: '调休统计',
+        name: 'breakoffAll',
+        icon: 'jbtj',
+        path: '/breakoffAll',
+        children: []
+      }, {
+        title: '倍率查询',
+        name: 'times',
+        icon: 'works',
+        path: '/times',
+        children: []
+      }, {
         title: '休假记录',
         name: 'leaveRecord',
         icon: 'holiday',
@@ -57,12 +75,6 @@ const user = {
         name: 'inquiry',
         icon: 'works',
         path: '/inquiry',
-        children: []
-      }, {
-        title: '倍率查询',
-        name: 'times',
-        icon: 'works',
-        path: '/times',
         children: []
       }]
     },

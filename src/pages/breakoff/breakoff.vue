@@ -1,31 +1,25 @@
 <template>
     <div class="app-container">
-      <div class="row listPersonalOtDetail">
-          <el-table :data="records.otdetail" style="width: 100%" height="360">
+      <div class="row">
+          <el-table :data="records.otdetail" style="width: 100%" height="660px">
               <el-table-column align="center" prop="pcode" label="工号"></el-table-column>
-              <el-table-column align="center" prop="workDate" label="日期" width='100'></el-table-column>
-              <el-table-column align="center" prop="otStartTime" label="开始时间"></el-table-column>
-              <el-table-column align="center" prop="otEndTime" label="结束时间"></el-table-column>
-              <el-table-column align="center" prop="startTime" label="上班刷卡"></el-table-column>
-              <el-table-column align="center" prop="endTime" label="下班刷卡"></el-table-column>
-              <el-table-column align="center" label="持续小时">
+              <el-table-column align="center" prop="pname" label="姓名"></el-table-column>
+              <el-table-column align="center" prop="workYear" label="年份"></el-table-column>
+              <el-table-column align="center" prop="workMonth" label="月份"></el-table-column>
+              <el-table-column align="center" label="可调休时长">
                 <template slot-scope="scope">
-                  {{formatOtTime(scope.row.ot)}}
+                  {{formatOtTime(scope.row.usableBreakOffTime)}}
                 </template>
               </el-table-column>
-              <el-table-column align="center" label="折合小时">
+              <el-table-column align="center" label="已调休时长">
                 <template slot-scope="scope">
-                  {{formatOtTime(scope.row.actOt)}}
+                  {{formatOtTime(scope.row.usedBreakOffTime)}}
                 </template>
               </el-table-column>
-              <el-table-column align="center" label="类型">
-                  <template>调休</template>
-              </el-table-column>
-              <el-table-column align="center" label="事由" width="218">
-                  <template>厦门航空传媒科技视频制作</template>
-              </el-table-column>
-              <el-table-column align="center" label="状态">
-                  <template>已通过</template>
+              <el-table-column align="center" label="调休率">
+                <template slot-scope="scope">
+                  {{formatNumber(scope.row.breakOffVal)}} %
+                </template>
               </el-table-column>
           </el-table>
           <el-pagination v-if="records.otdetail.length > 0"
@@ -34,39 +28,14 @@
             layout="prev, pager, next, total, sizes">
           </el-pagination>
       </div>
-      <div class="row listPersonaOvertime">
-        <el-table :data="records.overtime" style="width: 100%" height="280">
-          <el-table-column align="center" type="index" label="序号" width="80"></el-table-column>
-          <el-table-column align="center" label="加班小时数(计费)">
-            <template>
-              0
-            </template>
-          </el-table-column>
-          <el-table-column align="center" label="加班小时数(调休)">
-            <template slot-scope="scope">
-              {{(scope.row.totalOverTime / 3600).toFixed(2)}}
-            </template>
-          </el-table-column>
-          <el-table-column align="center" label="总加班小时数">
-            <template slot-scope="scope">
-              {{(scope.row.totalOverTime / 3600).toFixed(2)}}
-            </template>
-          </el-table-column>
-          <el-table-column align="center" label="调休小时数">
-            <template slot-scope="scope">
-              {{(scope.row.totalOverTime / 3600).toFixed(2)}}
-            </template>
-          </el-table-column>
-        </el-table>
-      </div>
     </div>
 </template>
 
 <script>
 import util from '../../utils/utils'
-import {listPersonalOtDetail, listPersonaOvertime} from '../../api/index'
+import {listMfBreakOffs} from '../../api/index'
 export default {
-  name: 'overtimeRecord',
+  name: 'breakoff',
   data () {
     return {
       pcode: undefined,
@@ -89,7 +58,7 @@ export default {
         workYearStart: undefined
       },
       page: 1,
-      pageSize: 10,
+      pageSize: 20,
       total: undefined
     }
   },
@@ -110,7 +79,9 @@ export default {
     },
     init () {
       this.listPersonalOtDetail()
-      this.listPersonaOvertime()
+    },
+    formatNumber (value) {
+      return (value * 100).toFixed(2)
     },
     listPersonalOtDetail () {
       let that = this
@@ -118,31 +89,16 @@ export default {
         pageIndex: this.page,
         pageSize: this.pageSize,
         pcode: this.pcode || this.weekMonth.pcode,
-        workEndDate: this.weekHour.workEndDate,
-        workStartDate: this.weekHour.workStartDate
+        workMonth: 12,
+        workYear: 2019
       }
-      listPersonalOtDetail(param).then(response => {
+      listMfBreakOffs(param).then(response => {
         console.log(response)
         let obj = response.data.object
         that.total = obj.recordTotal
         that.records.otdetail = obj.list
       }).catch(error => {
         that.$notify.error(error)
-      })
-    },
-    listPersonaOvertime () {
-      let that = this
-      let param = {
-        pcode: this.pcode || this.weekMonth.pcode,
-        workStartDate: this.weekHour.workStartDate,
-        workEndDate: this.weekHour.workEndDate,
-        pageIndex: 1,
-        pageSize: 100
-      }
-      listPersonaOvertime(param).then(response => {
-        that.records.overtime = response.data.object.list
-      }).catch(error => {
-        that.$message.error(error)
       })
     },
     formatOtTime (value) {
@@ -152,9 +108,6 @@ export default {
       let minute = util.getMinute(value)
       let result = minute / 60
       return result.toFixed(2)
-    },
-    formatNumber (value) {
-      return util.formatNumber(value)
     },
     handleSizeChange (value) {
       this.pageSize = value

@@ -257,7 +257,7 @@ export default {
         } else if (util.isNull(data.totalWorkTime)) {
           that.rate.personal = 100
         } else {
-          that.rate.personal = parseInt(that.rate.personalHour)
+          that.rate.personal = Math.ceil(data.totalOverTime / data.totalWorkTime)
         }
         console.log('--')
         console.log(that.rate)
@@ -270,8 +270,8 @@ export default {
     },
     getOverTimeRateComp () {
       let param = {
-        workEndDate: util.getComp(this.weekHour.workEndDate),
-        workStartDate: util.getComp(this.weekHour.workStartDate)
+        workEndDate: this.weekHour.workEndDate,
+        workStartDate: this.weekHour.workStartDate
       }
       let that = this
       getOverTimeForAll(param).then(response => {
@@ -386,7 +386,7 @@ export default {
         data.push(item.partName)
         value.push({
           name: item.partName,
-          value: item.talOverTime == null ? 10 : item.talOverTime / 3600
+          value: item.talOverTime == null ? 10 : (item.talOverTime / 3600).toFixed(2)
         })
       })
       let option = {
@@ -543,7 +543,11 @@ export default {
       this.getOverTimeRate()
       this.getOverTimeRateComp()
       this.getPersonalOvertime()
-      this.getPeriodOvertimeWeek()
+      if (this.activeTab === 'week') {
+        this.getPeriodOvertimeWeek()
+      } else {
+        this.getPeriodOvertime()
+      }
       this.getPartOvertime()
     }
   },
