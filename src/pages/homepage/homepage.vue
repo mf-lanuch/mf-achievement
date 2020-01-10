@@ -85,7 +85,7 @@
           <el-tab-pane label="周统计" name="week">1</el-tab-pane>
           <el-tab-pane label="月统计" name="month">2</el-tab-pane>
         </el-tabs>
-        <el-select v-model="weekHour.partId" placeholder="请选择" style="margin: 0 24px">
+        <el-select v-model="weekHour.partId" placeholder="请选择" style="margin: 0 24px" @change="changePeriod">
         <el-option
           v-for="item in deptlist"
           :key="item.value"
@@ -238,6 +238,13 @@ export default {
         this.getPeriodOvertime()
       }
       console.log(tab.name)
+    },
+    changePeriod () {
+      if (this.activeTab === 'week') {
+        this.getPeriodOvertimeWeek()
+      } else if (this.activeTab === 'month') {
+        this.getPeriodOvertime()
+      }
     },
     getPeriodOvertime () {
       let that = this
