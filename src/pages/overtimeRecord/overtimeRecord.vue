@@ -10,12 +10,12 @@
               <el-table-column align="center" prop="endTime" label="下班刷卡"></el-table-column>
               <el-table-column align="center" label="持续小时">
                 <template slot-scope="scope">
-                  {{formatOtTime(scope.row.ot)}}
+                  {{formatOtTime(scope.row.actOt)}}
                 </template>
               </el-table-column>
               <el-table-column align="center" label="折合小时">
                 <template slot-scope="scope">
-                  {{formatOtTime(scope.row.actOt)}}
+                  {{formatOtTime(scope.row.ot)}}
                 </template>
               </el-table-column>
               <el-table-column align="center" label="类型">

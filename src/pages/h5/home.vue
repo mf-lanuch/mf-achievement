@@ -1,5 +1,5 @@
 <template>
-    <div class="app-container">
+    <div class="app-container" style="background: rgb(223, 223, 223)">
       <img class="bg" src="../../assets/h5/background.png"/>
       <div class="app-body">
           <div class="app-body-header">
