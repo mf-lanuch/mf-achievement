@@ -80,11 +80,19 @@
       </div>
     </div>
     <div class="row body">
-      <div class="acievement-type">
-        <el-tabs v-model="activeTab" @tab-click="handleTabClick">
+      <div class="acievement-type" style="display: flex">
+        <el-tabs v-model="activeTab" @tab-click="handleTabClick" style="flex-grow: 1">
           <el-tab-pane label="周统计" name="week">1</el-tab-pane>
           <el-tab-pane label="月统计" name="month">2</el-tab-pane>
         </el-tabs>
+        <el-select v-model="weekHour.partId" placeholder="请选择" style="margin: 0 24px">
+        <el-option
+          v-for="item in deptlist"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value">
+        </el-option>
+      </el-select>
       </div>
       <div class="achievement-data">
         <div class="achievement-week-month">
@@ -144,6 +152,21 @@ export default {
       activeTab: 'week',
       newTab: 'week',
       weekHourHeight: undefined,
+      deptlist: [
+        {label: '《品》杂志社', value: '00703E4530494770B7519B88DE91F26D'},
+        {label: '生产运行开发中心', value: '122E5E13ABFA47548F41D594CED5210E'},
+        {label: '综合处', value: '16F3E95E6BDA4F9A9B473AB2DCAE1924'},
+        {label: '质控中心', value: '1D726FCF975C44289F4ADAC9213D6B7B'},
+        {label: '品牌中心', value: '34AE0C63779F48BC8EEA2CA0105EE11A'},
+        {label: '《天空之城》运营中心', value: '37BA657E8A5541FD88E552B22297C5E7'},
+        {label: '《厦门航空》杂志社', value: '41A5367A80D44D979725CE92CBA3DFCC'},
+        {label: '财务处', value: '43E4109CC6D446FC80A05FC5C34871DB'},
+        {label: '河北航办事处', value: '62DB34EBCF52471DA6750E2AE49BBC8B'},
+        {label: '商务营销开发中心', value: '7B3DAB9E4E924D99B993D74907F349E2'},
+        {label: '音像中心', value: 'A7C4058581194CDBB933E91CD4499FFE'},
+        {label: '电商中心', value: 'D3BDE2F830BD47E1B8706952A0B4EC73'},
+        {label: '行政服务开发中心', value: 'E8F0FFCCBC844D808DBFD424A6B5E014'}
+      ],
       tableData: [{
         module: '传媒科技',
         hour: undefined,
@@ -486,7 +509,7 @@ export default {
           type: 'value'
         }],
         series: [{
-          name: '直接访问',
+          name: '',
           type: 'bar',
           barWidth: '34px',
           data: weekValue
@@ -569,6 +592,12 @@ export default {
 <style lang="scss" scoped>
 #container {
   /deep/ {
+    .el-select {
+      input {
+        border: 0;
+        color: #000000
+      }
+    }
     .el-table__header .has-gutter > tr > th{
       background: #FAFAFA;
       border: 1px solid rgba(151, 151, 151, .19)

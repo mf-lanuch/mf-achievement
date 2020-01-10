@@ -321,7 +321,7 @@ export default {
           }
         }],
         series: [{
-          name: '直接访问',
+          name: '',
           type: 'bar',
           barWidth: '24px',
           data: weekValue

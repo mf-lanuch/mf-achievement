@@ -7,7 +7,7 @@ const user = {
   state: {
     userInfo: {
       pcode: '00045',
-      partId: '122E5E13ABFA47548F41D594CED5210E'
+      partId: '7B3DAB9E4E924D99B993D74907F349E2'
     },
     menus: {
       children: [{
